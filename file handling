@@ -1,0 +1,180 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+using namespace std;
+
+void get_record() {
+    ofstream fout("student.txt", ios::app);  // Open in append mode
+
+    if (!fout) {
+        cerr << "Error: File could not be opened!" << endl;
+        return;
+    }
+
+    char name[50], id[50];
+    int age;
+    float gpa;
+
+    cout << "Enter the student ID: ";
+    cin >> id;
+    fout << "id: " << id;
+
+    cout << "Enter the student name: ";
+    cin.ignore();      // To clear the newline character from the buffer
+    cin.getline(name, 50);
+    fout << " name: " << name;
+
+    cout << "Enter the student age: ";
+    cin >> age;
+    fout << " age: " << age;
+
+    cout << "Enter the student GPA: ";
+    cin >> gpa;
+    fout << " gpa: " << gpa << endl << endl;
+
+    fout.close();
+}
+
+void display_record() { // Displays all student records
+    ifstream fin("student.txt");
+
+    if (!fin) {
+        cerr << "Error: File could not be opened!" << endl;
+        return;
+    }
+
+    string line;
+    while (getline(fin, line)) {
+        cout << line << endl;
+    }
+    cout << endl;
+    fin.close();
+}
+
+void find_cgpa() { // Finds students with a specific CGPA
+    ifstream fin("student.txt");
+    string cgpa;
+
+    cout << "Enter the CGPA to find data: ";
+    cin >> cgpa;
+
+    string line;
+    bool found = false;
+
+    while (getline(fin, line)) {
+        if (line.find(" gpa: " + cgpa) != string::npos) {
+            cout << "STUDENTS FOUND WITH GIVEN CGPA: " << endl << line << endl;
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "No student found with CGPA " << cgpa << endl;
+    }
+
+    cout << endl;
+    fin.close();
+}
+
+void find_ID() { // Finds a student by their ID
+    ifstream fin("student.txt");
+    string id;
+
+    cout << "Enter the ID to find data: ";
+    cin >> id;
+
+    string line;
+    bool found = false;
+
+    while (getline(fin, line)) {
+        if (line.find("id: " + id) != string::npos) {
+            cout << "STUDENT FOUND WITH GIVEN ID: " << endl << line << endl;
+            found = true;
+        }
+    }
+
+    if (!found) {
+        cout << "No student found with ID " << id << endl;
+    }
+
+    cout << endl;
+    fin.close();
+}
+
+void updateStudent() { // Updates student information based on ID
+    ifstream inFile("student.txt");
+    ofstream outFile("temp.txt");
+
+    if (!inFile || !outFile) {
+        cout << "Error opening file!" << endl;
+        return;
+    }
+
+    string searchID;
+    cout << "Enter the student ID to update: ";
+    cin >> searchID;
+
+    string id, name, age, cgpa, line;
+    bool found = false;
+
+    while (getline(inFile, line)) {
+        if (line.find("id: " + searchID) != string::npos) {
+            cout << "Enter new ID: ";
+            cin >> id;
+
+            cout << "Enter new Name: ";
+            cin.ignore();
+            getline(cin, name);
+
+            cout << "Enter new Age: ";
+            cin >> age;
+
+            cout << "Enter new GPA: ";
+            cin >> cgpa;
+
+            outFile << "id: " << id << " name: " << name << " age: " << age << " gpa: " << cgpa << endl;
+            found = true;
+        }
+        else {
+            outFile << line << endl; // Copy unchanged records
+        }
+    }
+
+    inFile.close();
+    outFile.close();
+
+    if (found) {
+        remove("student.txt");
+        rename("temp.txt", "student.txt");
+        cout << "Student record updated successfully!" << endl;
+    }
+    else {
+        cout << "Student ID not found!" << endl;
+    }
+}
+
+void student_system() { // Main system function
+    cout << "STUDENT MANAGEMENT SYSTEM: " << endl << endl;
+    int choice;
+
+    while (true) {
+        cout << "PRESS 1 TO ENTER A NEW STUDENT" << endl;
+        cout << "PRESS 2 TO FIND A STUDENT WITH ID" << endl;
+        cout << "PRESS 3 TO FIND A STUDENT WITH CGPA" << endl;
+        cout << "PRESS 4 TO DISPLAY THE STUDENT LIST" << endl;
+        cout << "PRESS 5 TO UPDATE A STUDENT RECORD" << endl;
+        cout << "PRESS 0 TO EXIT" << endl;
+        cout << "Input: ";
+        cin >> choice;
+
+        if (choice == 1) get_record();
+        else if (choice == 2) find_ID();
+        else if (choice == 3) find_cgpa();
+        else if (choice == 4) display_record();
+        else if (choice == 5) updateStudent();
+        else if (choice == 0) {
+            cout << endl << "Closing the system......" << endl << "CLOSED" << endl;
+            break;
+        }
+        else {
+            cerr <<
