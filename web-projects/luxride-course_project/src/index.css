@@ -1,0 +1,153 @@
+/* src/index.css */
+body {
+  background-color: #1a1a1a;
+  color: #e0e0e0;
+  font-family: 'Georgia', serif;
+  margin: 0;
+  text-align: center;
+}
+
+/* Typography */
+h1, h2, h3, h4, th, legend {
+  color: #ffc300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 300;
+  margin: 30px 0 10px;
+}
+
+h1 { font-size: 2.2em; }
+h2 { font-size: 1.8em; }
+
+p {
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* --- Golden Line (HR) --- */
+hr {
+  border: 0;
+  height: 2px;
+  background-color: #ffc300;
+  width: 90%;
+  max-width: 800px;
+  margin: 30px auto;
+}
+
+/* --- NEW: Beautiful Navbar --- */
+.nav-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+.nav-link {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 12px;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: #ffc300;
+  border-bottom: 2px solid #ffc300;
+  background-color: rgba(255, 195, 0, 0.05);
+}
+
+/* --- NEW: Gold Buttons (Explore More) --- */
+.btn-explore {
+  display: inline-block;
+  background-color: transparent;
+  color: #ffc300;
+  border: 1px solid #ffc300;
+  padding: 10px 20px;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.9em;
+  margin-top: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-explore:hover {
+  background-color: #ffc300;
+  color: #1a1a1a;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 195, 0, 0.3);
+}
+
+/* --- Registration Form Fix (No more ugly box) --- */
+.form-container {
+  background-color: #242424;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 500px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  border-top: 3px solid #ffc300; /* Subtle top accent only */
+}
+
+input, textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0 20px;
+  box-sizing: border-box;
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+}
+
+input:focus, textarea:focus {
+  border-color: #ffc300;
+  outline: none;
+}
+
+button.btn-submit {
+  background-color: #ffc300;
+  color: #1a1a1a;
+  border: none;
+  padding: 12px 25px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: background 0.3s;
+}
+button.btn-submit:hover { background-color: #e6b000; }
+
+/* --- General Images & Header/Footer --- */
+header {
+  background-color: #0d0d0d;
+  padding: 20px 0;
+  border-bottom: 1px solid #333;
+}
+footer {
+  background-color: #0d0d0d;
+  padding: 40px 0;
+  border-top: 1px solid #333;
+  margin-top: 50px;
+}
+header img, footer img { border: none !important; }
+
+main img, main video {
+  max-width: 100%;
+  height: auto;
+  border: 3px solid #ffc300;
+  border-radius: 4px;
+}
+
+.hover-img { transition: transform 0.3s ease; }
+.hover-img:hover { transform: scale(1.03); cursor: pointer; }
+
+/* Tables */
+table { margin: 20px auto; border-collapse: collapse; }
